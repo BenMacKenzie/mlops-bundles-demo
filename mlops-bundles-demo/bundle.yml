@@ -1,0 +1,46 @@
+variables:
+  experiment_name:
+    description: Experiment name for the model training.
+    default: /Shared/gh-mlops-stack-dab/${bundle.environment}-gh-mlops-stack-dab-experiment
+  model_name:
+    description: Model name for the model training.
+    default: ${bundle.environment}-gh-mlops-stack-dab-model
+
+
+bundle:
+  name: gh-mlops-stack-dab
+
+
+include:
+  # Include ML artifact resources for the ml project
+  # Defines model and experiment
+  - ./databricks-resources/ml-artifacts-resource.yml
+
+  # Include workflow resources of the ml project
+  # Defines workflow for model training -> validation -> deployment
+  - ./databricks-resources/model-workflow-resource.yml
+  # Defines workflow for scheduled batch inference
+  - ./databricks-resources/batch-inference-workflow-resource.yml
+  # Defines workflow for data monitoring, metric refresh, alerts and triggering retraining
+  - ./databricks-resources/monitoring-workflow-resource.yml
+
+
+# Environment specific values for workspace
+environments:
+  dev:
+    default: true
+    workspace:
+      host: https://adb-7580217694832751.11.azuredatabricks.net
+
+  staging:
+    workspace:
+      host: https://adb-4301376284584187.7.azuredatabricks.net
+
+  prod:
+    workspace:
+      host: https://adb-3011150083119087.7.azuredatabricks.net
+
+  test:
+    workspace:
+      host: https://adb-4301376284584187.7.azuredatabricks.net
+
