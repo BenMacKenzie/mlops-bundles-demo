@@ -61,7 +61,7 @@ To set up the databricks CLI using a Databricks personal access token, take the 
 2. Complete the `TODO` in `gh_mlops_stack_dab/bundle.yml` to add the dev workspace URI under `environments.dev.workspace.host`.
 3. [Create a personal access token](https://learn.microsoft.com/azure/databricks/dev-tools/auth#personal-access-tokens-for-users)
   in your dev workspace and copy it.
-4. Set an env variable `DATABRICKS_TOKEN` with your Databricks personal access token in your terminal. For example, run `export DATABRICKS_TOKEN=dapi1234567890ab1cde2f3ab456c7d89efa` if the access token is dapi1234567890ab1cde2f3ab456c7d89efa.
+4. Set an env variable `DATABRICKS_TOKEN` with your Databricks personal access token in your terminal. For example, run `export DATABRICKS_TOKEN=xxx` if the access token is xxx.
 5. You can now use the databricks CLI to validate and deploy ML resource configurations to the dev workspace.
 
 Alternatively, you can use the other approaches described in the [databricks CLI](https://learn.microsoft.com/azure/databricks/dev-tools/cli/databricks-cli) documentation to set up authentication. For example, using your Databricks username/password, or seting up a local profile.
