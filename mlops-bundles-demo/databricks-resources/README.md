@@ -15,15 +15,15 @@
 MLOps-stacks ML resources are configured and deployed through [databricks CLI bundles](https://learn.microsoft.com/azure/databricks/dev-tools/cli/bundle-cli). 
 The bundle setting file must be expressed in YAML format and must contain at minimum the top-level bundle mapping.
 
-The databricks CLI bundles top level is defined by file `gh_mlops_stack_dab/bundle.yml`.
+The databricks CLI bundles top level is defined by file `mlops-bundles-demo/bundle.yml`.
 During databricks CLI bundles deployment, the root config file will be loaded, validated and deployed to workspace provided by the environment together with all the included resources.
 
 ML Resource Configurations in this directory:
- - model workflow (`gh_mlops_stack_dab/databricks-resources/model-workflow-resource.yml`)
- - batch inference workflow (`gh_mlops_stack_dab/databricks-resources/batch-inference-workflow-resource.yml`)
- - monitoring workflow (`gh_mlops_stack_dab/databricks-resources/monitoring-workflow-resource.yml`)
- - feature engineering workflow (`gh_mlops_stack_dab/databricks-resources/feature-engineering-workflow-resource.yml`)
- - model definition and experiment definition (`gh_mlops_stack_dab/databricks-resources/ml-artifacts-resource.yml`)
+ - model workflow (`mlops-bundles-demo/databricks-resources/model-workflow-resource.yml`)
+ - batch inference workflow (`mlops-bundles-demo/databricks-resources/batch-inference-workflow-resource.yml`)
+ - monitoring workflow (`mlops-bundles-demo/databricks-resources/monitoring-workflow-resource.yml`)
+ - feature engineering workflow (`mlops-bundles-demo/databricks-resources/feature-engineering-workflow-resource.yml`)
+ - model definition and experiment definition (`mlops-bundles-demo/databricks-resources/ml-artifacts-resource.yml`)
 
 
 ### Environment Config & CI/CD integration
@@ -34,10 +34,10 @@ This project ships with CI/CD workflows for developing and deploying ML resource
 
 | Environment | Description                                                                                                                                                                                                                           | Databricks Workspace | Model Name                          | Experiment Name                                |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|-------------------------------------|------------------------------------------------|
-| dev         | The `dev` environment is used by ML engineers to deploy ML resources to development workspace with `dev` environment configs. The config is for ML project development purposes.                                                           | dev workspace        | dev-gh-mlops-stack-dab-model     | /dev-gh-mlops-stack-dab-experiment     |
-| staging     | The `staging` environment is part of the CD pipeline. Latest main content will be deployed to staging workspace with `staging` environment config.                                                             | staging workspace    | staging-gh-mlops-stack-dab-model | /staging-gh-mlops-stack-dab-experiment |
-| prod        | The `prod` environment is part of the CD pipeline. Latest release content will be deployed to prod workspace with `prod` environment config.                                                                      | prod workspace       | prod-gh-mlops-stack-dab-model    | /prod-gh-mlops-stack-dab-experiment    |
-| test        | The `test` environment is part of the CI pipeline. For changes targeting the main branch, upon making a PR, an integration test will be triggered and ML resources deployed to the staging workspace defined under `test` environment. | staging workspace    | test-gh-mlops-stack-dab-model    | /test-gh-mlops-stack-dab-experiment    |
+| dev         | The `dev` environment is used by ML engineers to deploy ML resources to development workspace with `dev` environment configs. The config is for ML project development purposes.                                                           | dev workspace        | dev-mlops-bundles-demo-model     | /dev-mlops-bundles-demo-experiment     |
+| staging     | The `staging` environment is part of the CD pipeline. Latest main content will be deployed to staging workspace with `staging` environment config.                                                             | staging workspace    | staging-mlops-bundles-demo-model | /staging-mlops-bundles-demo-experiment |
+| prod        | The `prod` environment is part of the CD pipeline. Latest release content will be deployed to prod workspace with `prod` environment config.                                                                      | prod workspace       | prod-mlops-bundles-demo-model    | /prod-mlops-bundles-demo-experiment    |
+| test        | The `test` environment is part of the CI pipeline. For changes targeting the main branch, upon making a PR, an integration test will be triggered and ML resources deployed to the staging workspace defined under `test` environment. | staging workspace    | test-mlops-bundles-demo-model    | /test-mlops-bundles-demo-experiment    |
 
 During ML code development, you can deploy local ML resource configurations together with ML code to the a Databricks workspace to run the training, model validation or batch inference pipelines. The deployment will use `dev` environment config by default. 
 
@@ -58,7 +58,7 @@ Upon merging code into the release branch, the release branch content will be de
 To set up the databricks CLI using a Databricks personal access token, take the following steps:
 
 1. Follow [databricks CLI](https://learn.microsoft.com/azure/databricks/dev-tools/cli/databricks-cli) to download and set up the databricks CLI locally.
-2. Complete the `TODO` in `gh_mlops_stack_dab/bundle.yml` to add the dev workspace URI under `environments.dev.workspace.host`.
+2. Complete the `TODO` in `mlops-bundles-demo/bundle.yml` to add the dev workspace URI under `environments.dev.workspace.host`.
 3. [Create a personal access token](https://learn.microsoft.com/azure/databricks/dev-tools/auth#personal-access-tokens-for-users)
   in your dev workspace and copy it.
 4. Set an env variable `DATABRICKS_TOKEN` with your Databricks personal access token in your terminal. For example, run `export DATABRICKS_TOKEN=xxx` if the access token is xxx.
@@ -67,9 +67,9 @@ To set up the databricks CLI using a Databricks personal access token, take the 
 Alternatively, you can use the other approaches described in the [databricks CLI](https://learn.microsoft.com/azure/databricks/dev-tools/cli/databricks-cli) documentation to set up authentication. For example, using your Databricks username/password, or seting up a local profile.
 
 ### Validate and provision ML resource configurations
-1. After installing the databricks CLI and creating the `DATABRICKS_TOKEN` env variable, change to the gh_mlops_stack_dab directory.
+1. After installing the databricks CLI and creating the `DATABRICKS_TOKEN` env variable, change to the mlops-bundles-demo directory.
 2. Run `databricks bundle validate` to validate the Databricks resource configurations. 
-3. Run `databricks bundle deploy` to provision the Databricks resource configurations to the dev workspace. The resource configurations and your ML code will be copied together to the dev workspace. The defined resources such as Databricks Workflows, MLflow Model and MLflow Experiment will be provisioned according to the config files under `gh_mlops_stack_dab/databricks-resource`.
+3. Run `databricks bundle deploy` to provision the Databricks resource configurations to the dev workspace. The resource configurations and your ML code will be copied together to the dev workspace. The defined resources such as Databricks Workflows, MLflow Model and MLflow Experiment will be provisioned according to the config files under `mlops-bundles-demo/databricks-resource`.
 4. Go to the Databricks dev workspace, check the defined model, experiment and workflows status, and interact with the created workflows.
 
 ### Destroy ML resource configurations
@@ -98,7 +98,7 @@ Follow the next section to configure the input and output data tables for the ba
 ### Setting up the batch inference job
 The batch inference job expects an input Delta table with a schema that your registered model accepts. To use the batch
 inference job, set up such a Delta table in both your staging and prod workspaces.
-Following this, update the batch_inference_job base parameters in `gh_mlops_stack_dab/databricks-resource/batch-inference-workflow-resource.yml` to pass
+Following this, update the batch_inference_job base parameters in `mlops-bundles-demo/databricks-resource/batch-inference-workflow-resource.yml` to pass
 the name of the input Delta table and the name of the output Delta table to which to write batch predictions.
 
 As the batch job will be run with the credentials of the service principal that provisioned it, make sure that the service
@@ -124,7 +124,7 @@ resolve the `TODOs` in the ModelValidation task of [model-workflow-resource.yml]
 ## Develop and test config changes
 
 ### databricks CLI bundles schema overview
-To get started, open `gh_mlops_stack_dab/databricks-resources/batch-inference-workflow-resource.yml`.  The file contains the ML resource definition of a batch inference job, like:
+To get started, open `mlops-bundles-demo/databricks-resources/batch-inference-workflow-resource.yml`.  The file contains the ML resource definition of a batch inference job, like:
 
 ```$xslt
 new_cluster: &new_cluster
@@ -138,7 +138,7 @@ new_cluster: &new_cluster
 resources:
   jobs:
     batch_inference_job:
-      name: ${bundle.environment}-gh-mlops-stack-dab-batch-inference-job
+      name: ${bundle.environment}-mlops-bundles-demo-batch-inference-job
       tasks:
         - task_key: batch_inference_job
           <<: *new_cluster
@@ -150,12 +150,12 @@ resources:
               ...
 ```
 
-The example above defines a Databricks job with name `${bundle.environment}-gh-mlops-stack-dab-batch-inference-job`
-that runs the notebook under `gh_mlops_stack_dab/deployment/batch_inference/notebooks/BatchInference.py` to regularly apply your ML model for batch inference. 
+The example above defines a Databricks job with name `${bundle.environment}-mlops-bundles-demo-batch-inference-job`
+that runs the notebook under `mlops-bundles-demo/deployment/batch_inference/notebooks/BatchInference.py` to regularly apply your ML model for batch inference. 
 
 At the start of the resource definition, we declared an anchor `new_cluster` that will be referenced and used later. For more information about anchors in yaml schema, please refer to the [yaml documentation](https://yaml.org/spec/1.2.2/#3222-anchors-and-aliases).
 
-We specify a `batch_inference_job` under `resources/jobs` to define a databricks workflow with internal key `batch_inference_job` and job name `{bundle.environment}-gh-mlops-stack-dab-batch-inference-job`. 
+We specify a `batch_inference_job` under `resources/jobs` to define a databricks workflow with internal key `batch_inference_job` and job name `{bundle.environment}-mlops-bundles-demo-batch-inference-job`. 
 The workflow contains a single task with task key `batch_inference_job`. The task runs notebook `../deployment/batch_inference/notebooks/BatchInference.py` with provided parameters `env` and `input_table_name` passing to the notebook.
 After setting up databricks CLI, you can run command `databricks bundle schema`  to learn more about databricks CLI bundles schema.
 
@@ -163,8 +163,8 @@ The notebook_path is the relative path starting from the resource yaml file.
 
 ### Environment config based variables
 The `${bundle.environment}` will be replaced by the environment config name during the bundle deployment. For example, during the deployment of a `test` environment config, the job name will be
-`test-gh-mlops-stack-dab-batch-inference-job`. During the deployment of the `staging` environment config, the job name will be
-`staging-gh-mlops-stack-dab-batch-inference-job`.
+`test-mlops-bundles-demo-batch-inference-job`. During the deployment of the `staging` environment config, the job name will be
+`staging-mlops-bundles-demo-batch-inference-job`.
 
 
 To use different values based on different environment, you can use bundle variables based on the given environment, for example,
@@ -193,7 +193,7 @@ new_cluster: &new_cluster
 resources:
   jobs:
     batch_inference_job:
-      name: ${bundle.environment}-gh-mlops-stack-dab-batch-inference-job
+      name: ${bundle.environment}-mlops-bundles-demo-batch-inference-job
       tasks:
         - task_key: batch_inference_job
           <<: *new_cluster

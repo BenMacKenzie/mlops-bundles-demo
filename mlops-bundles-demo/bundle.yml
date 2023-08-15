@@ -1,14 +1,14 @@
 variables:
   experiment_name:
     description: Experiment name for the model training.
-    default: /Shared/gh-mlops-stack-dab/${bundle.environment}-gh-mlops-stack-dab-experiment
+    default: /Shared/mlops-bundles-demo/${bundle.environment}-mlops-bundles-demo-experiment
   model_name:
     description: Model name for the model training.
-    default: ${bundle.environment}-gh-mlops-stack-dab-model
+    default: ${bundle.environment}-mlops-bundles-demo-model
 
 
 bundle:
-  name: gh-mlops-stack-dab
+  name: mlops-bundles-demo
 
 
 include:

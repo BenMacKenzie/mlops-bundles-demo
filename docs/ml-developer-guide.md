@@ -17,7 +17,7 @@ started iterating on model training code.
 
 ### Deploy ML code and resources to dev workspace using bundles
 
-Refer to [Local development and dev workspace](../gh_mlops_stack_dab/databricks-resources/README.md#local-development-and-dev-workspace) 
+Refer to [Local development and dev workspace](../mlops-bundles-demo/databricks-resources/README.md#local-development-and-dev-workspace) 
 to use databricks CLI bundles to deploy ML code together with resource configs to the dev workspace.
 
 This will allow you to develop locally and use databricks CLI bundles to deploy to your dev workspace to test out code and config changes.
@@ -40,17 +40,17 @@ Otherwise, e.g. if iterating on ML code for a new project, follow the steps belo
 * Follow the [UI workflow](https://learn.microsoft.com/azure/databricks/repos/git-operations-with-repos#add-a-repo-and-connect-remotely-later)
   for creating a repo, but uncheck the "Create repo by cloning a Git repository" checkbox.
 * Install the `dbx` CLI via `pip install --upgrade dbx`
-* Run `databricks configure --profile gh-mlops-stack-dab-dev --token --host <your-dev-workspace-url>`, passing the URL of your dev workspace.
+* Run `databricks configure --profile mlops-bundles-demo-dev --token --host <your-dev-workspace-url>`, passing the URL of your dev workspace.
   This should prompt you to enter an API token
 * [Create a personal access token](https://learn.microsoft.com/azure/databricks/dev-tools/auth#personal-access-tokens-for-users)
   in your dev workspace and paste it into the prompt from the previous step
 * From within the root directory of the current project, use the [dbx sync](https://dbx.readthedocs.io/en/latest/guides/python/devloop/mixed/#using-dbx-sync-repo-for-local-to-repo-synchronization) tool to copy code files from your local machine into the Repo by running
-  `dbx sync repo --profile gh-mlops-stack-dab-dev --source . --dest-repo your-repo-name`, where `your-repo-name` should be the last segment of the full repo name (`/Repos/username/your-repo-name`)
+  `dbx sync repo --profile mlops-bundles-demo-dev --source . --dest-repo your-repo-name`, where `your-repo-name` should be the last segment of the full repo name (`/Repos/username/your-repo-name`)
 
 #### Running code on Databricks
-You can iterate on the sample ML code by running the provided `gh_mlops_stack_dab/training/notebooks/Train.py` notebook on Databricks using
+You can iterate on the sample ML code by running the provided `mlops-bundles-demo/training/notebooks/Train.py` notebook on Databricks using
 [Repos](https://learn.microsoft.com/azure/databricks/repos/index). This notebook drives execution of
-the ML code defined under ``gh_mlops_stack_dab/training/steps``. You can use multiple browser tabs to edit
+the ML code defined under ``mlops-bundles-demo/training/steps``. You can use multiple browser tabs to edit
 logic in `steps` and run the training recipe in the `Train.py` notebook.
 
 

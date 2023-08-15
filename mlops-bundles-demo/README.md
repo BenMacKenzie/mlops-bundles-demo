@@ -1,4 +1,4 @@
-# gh-mlops-stack-dab
+# mlops-bundles-demo
 
 This directory contains python code, notebooks and ML resource configs related to one ML project.
 

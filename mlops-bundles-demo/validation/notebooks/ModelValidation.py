@@ -5,7 +5,7 @@
 # This notebook uses mlflow model validation API to run mode validation after training and registering a model
 # in model registry, before deploying it to Production stage.
 #
-# It runs as part of CD and by an automated model training job -> validation -> deployment job defined under ``gh_mlops_stack_dab/databricks-resources/model-workflow-resource.yml``
+# It runs as part of CD and by an automated model training job -> validation -> deployment job defined under ``mlops-bundles-demo/databricks-resources/model-workflow-resource.yml``
 #
 #
 # Parameters:
@@ -21,8 +21,8 @@
 #                                             Baseline model is a requirement for relative change and absolute change validation thresholds.
 # * validation_input                        - Validation input. Please refer to data parameter in mlflow.evaluate documentation https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.evaluate
 
-# * custom_metrics_loader_function          - Specifies the name of the function in gh-mlops-stack-dab/validation/validation.py that returns custom metrics.
-# * validation_thresholds_loader_function   - Specifies the name of the function in gh-mlops-stack-dab/validation/validation.py that returns model validation thresholds.
+# * custom_metrics_loader_function          - Specifies the name of the function in mlops-bundles-demo/validation/validation.py that returns custom metrics.
+# * validation_thresholds_loader_function   - Specifies the name of the function in mlops-bundles-demo/validation/validation.py that returns model validation thresholds.
 #
 # For details on mlflow evaluate API, see doc https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.evaluate
 # For details and examples about performing model validation, see the Model Validation documentation https://mlflow.org/docs/latest/models.html#model-validation
@@ -62,7 +62,7 @@ dbutils.widgets.dropdown(
 )
 dbutils.widgets.text(
     "experiment_name",
-    "/dev-gh-mlops-stack-dab-experiment",
+    "/dev-mlops-bundles-demo-experiment",
     "Experiment Name",
 )
 dbutils.widgets.dropdown("run_mode", "disabled", ["disabled", "dry_run", "enabled"], "Run Mode")
@@ -72,7 +72,7 @@ dbutils.widgets.text("validation_input", "SELECT * FROM delta.`dbfs:/databricks-
 dbutils.widgets.text("custom_metrics_loader_function", "custom_metrics", "Custom Metrics Loader Function")
 dbutils.widgets.text("validation_thresholds_loader_function", "validation_thresholds", "Validation Thresholds Loader Function")
 dbutils.widgets.text("evaluator_config_loader_function", "evaluator_config", "Evaluator Config Loader Function")
-dbutils.widgets.text("model_name", "dev-gh-mlops-stack-dab-model", "Model Name")
+dbutils.widgets.text("model_name", "dev-mlops-bundles-demo-model", "Model Name")
 dbutils.widgets.text("model_version", "", "Candidate Model Version")
 
 # COMMAND ----------

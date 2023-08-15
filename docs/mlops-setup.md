@@ -16,7 +16,7 @@ This page explains how to productionize the current project, setting up CI/CD an
 ML resource deployment, and deploying ML training and inference jobs.
 
 After following this guide, data scientists can follow the [ML Pull Request](ml-pull-request.md) and
-[ML Config](../gh_mlops_stack_dab/databricks-resources/README.md)  guides to make changes to ML code or deployed jobs.
+[ML Config](../mlops-bundles-demo/databricks-resources/README.md)  guides to make changes to ML code or deployed jobs.
 
 ## Create a hosted Git repo
 Create a hosted Git repo to store project code, if you haven't already done so. From within the project
@@ -31,7 +31,7 @@ git remote add upstream <hosted-git-repo-url>
 
 Commit the current `README.md` file and other docs to the `main` branch of the repo, to enable forking the repo:
 ```
-git add README.md docs .gitignore gh_mlops_stack_dab/databricks-resources/README.md
+git add README.md docs .gitignore mlops-bundles-demo/databricks-resources/README.md
 git commit -m "Adding project README"
 git push upstream main
 ```
@@ -79,12 +79,12 @@ to add the following secrets to GitHub:
 
 ## Configure profiles for tests, staging, and prod
 Address the TODOs in the following files:
-* [databricks-dev.yaml](../gh_mlops_stack_dab/training/profiles/databricks-dev.yaml): specify recipe configs to use in dev workspace
-* [databricks-staging.yaml](../gh_mlops_stack_dab/training/profiles/databricks-staging.yaml): specify recipe configs to use in recurring model training and batch inference
+* [databricks-dev.yaml](../mlops-bundles-demo/training/profiles/databricks-dev.yaml): specify recipe configs to use in dev workspace
+* [databricks-staging.yaml](../mlops-bundles-demo/training/profiles/databricks-staging.yaml): specify recipe configs to use in recurring model training and batch inference
   jobs that run in the staging workspace
-* [databricks-prod.yaml](../gh_mlops_stack_dab/training/profiles/databricks-prod.yaml) specify recipe configs to use in recurring model training and batch inference
+* [databricks-prod.yaml](../mlops-bundles-demo/training/profiles/databricks-prod.yaml) specify recipe configs to use in recurring model training and batch inference
   jobs that run in the prod workspace
-* [databricks-test.yaml](../gh_mlops_stack_dab/training/profiles/databricks-test.yaml): specify recipe configs to use in integration tests(CI)
+* [databricks-test.yaml](../mlops-bundles-demo/training/profiles/databricks-test.yaml): specify recipe configs to use in integration tests(CI)
 
 ## Merge a PR with your initial ML code
 Create and push a PR branch adding the ML code to the repository.
@@ -118,11 +118,11 @@ Your production jobs (model training, batch inference) will pull ML code against
 
 For future ML code changes, iterate against the `main` branch and regularly deploy your ML code from staging to production by merging code changes from the `main` branch into the `release` branch.
 ## Deploy ML resources and enable production jobs
-Follow the instructions in [gh-mlops-stack-dab/databricks-resources/README.md](../gh_mlops_stack_dab/databricks-resources/README.md) to deploy ML resources
+Follow the instructions in [mlops-bundles-demo/databricks-resources/README.md](../mlops-bundles-demo/databricks-resources/README.md) to deploy ML resources
 and production jobs.
 
 ## Next steps
 After you configure CI/CD and deploy training & inference pipelines, notify data scientists working
 on the current project. They should now be able to follow the
-[ML pull request guide](ml-pull-request.md) and [ML resource config guide](../gh_mlops_stack_dab/databricks-resources/README.md)  to propose, test, and deploy
+[ML pull request guide](ml-pull-request.md) and [ML resource config guide](../mlops-bundles-demo/databricks-resources/README.md)  to propose, test, and deploy
 ML code and pipeline changes to production.

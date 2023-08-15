@@ -3,7 +3,7 @@ import os
 import tempfile
 import pandas as pd
 from pandas import DataFrame
-from gh_mlops_stack_dab.training.steps.ingest import load_file_as_dataframe
+from mlops-bundles-demo.training.steps.ingest import load_file_as_dataframe
 
 
 @pytest.fixture

@@ -30,7 +30,7 @@ of the Git repo. Support for running tests against pull requests from repo forks
 is planned for the future.
 
 ## Viewing test status and debug logs
-Opening a pull request will trigger a[workflow](../.github/workflows/gh-mlops-stack-dab-run-tests.yml) 
+Opening a pull request will trigger a[workflow](../.github/workflows/mlops-bundles-demo-run-tests.yml) 
 that runs unit and integration tests for the feature engineering and model training pipeline on Databricks against a test dataset.
 You can view test status and debug logs from the pull request UI, and push new commits to your pull request branch
 to address any test failures.
@@ -52,8 +52,8 @@ After merging your pull request, subsequent runs of the model training and batch
 jobs in staging and production will automatically use your updated ML code.
 
 You can track the state of the ML pipelines for the current project from the MLflow registered model UI. Links:
-* [Staging workspace registered model](https://adb-4301376284584187.7.azuredatabricks.net#mlflow/models/staging-gh-mlops-stack-dab-model)
-* [Prod workspace registered model](https://adb-3011150083119087.7.azuredatabricks.net#mlflow/models/prod-gh-mlops-stack-dab-model)
+* [Staging workspace registered model](https://adb-4301376284584187.7.azuredatabricks.net#mlflow/models/staging-mlops-bundles-demo-model)
+* [Prod workspace registered model](https://adb-3011150083119087.7.azuredatabricks.net#mlflow/models/prod-mlops-bundles-demo-model)
 
 In both the staging and prod workspaces, the MLflow registered model contains links to:
 * The model versions produced through automated retraining

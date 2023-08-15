@@ -4,7 +4,7 @@
 ##
 # This notebook runs the MLflow Regression Recipe to train and registers an MLflow model in the model registry.
 # It is configured and can be executed as the "Train" task in the model_training_job workflow defined under
-# ``gh_mlops_stack_dab/databricks-resources/model-workflow-resource.yml``
+# ``mlops-bundles-demo/databricks-resources/model-workflow-resource.yml``
 #
 # NOTE: In general, we recommend that you do not modify this notebook directly, and instead update data-loading
 # and model training logic in Python modules under the `steps` directory.
@@ -82,8 +82,8 @@ from mlflow.recipes.utils import (
 
 root_path = get_recipe_root_path()
 config = get_recipe_config(root_path, profile)
-if config['experiment']['name'].startswith(f"/{env}-gh-mlops-stack-dab-experiment"):
-    print("WARNING: The experiment name may not have been set correctly. Please confirm that the experiment name in the profile YAML file matches the experiment_name variable in gh_mlops_stack_dab/bundle.yml.")
+if config['experiment']['name'].startswith(f"/{env}-mlops-bundles-demo-experiment"):
+    print("WARNING: The experiment name may not have been set correctly. Please confirm that the experiment name in the profile YAML file matches the experiment_name variable in mlops-bundles-demo/bundle.yml.")
 
 # COMMAND ----------
 

@@ -13,8 +13,8 @@ This folder contains example ML code to train a regression model to predict NYC 
 
 **Note**: MLflow Recipes currently supports regression and classification problems. Usage of MLflow Recipes is encouraged but not required: you can still use the provided
 CI/CD and ML resource configs to build production ML pipelines, as long as you provide ML notebooks  under `notebooks` 
-directory of the corresponding component, for example, model training notebooks in `gh_mlops_stack_dab/training/notebooks`, 
-batch inference notebook in `gh_mlops_stack_dab/deployment/batch_inference/notebooks`.
+directory of the corresponding component, for example, model training notebooks in `mlops-bundles-demo/training/notebooks`, 
+batch inference notebook in `mlops-bundles-demo/deployment/batch_inference/notebooks`.
 See code comments in files under `notebooks` for the expected interface & behavior of these notebooks.
 
 If you're not using MLflow Recipes, you can still follow the docs below to develop your ML code, skipping sections
@@ -25,8 +25,8 @@ production jobs per the [MLOps setup guide](../../docs/mlops-setup.md).
 ### Configure your ML pipeline
 **This section assumes use of MLflow Recipes**.
 
-Address TODOs in the recipe configs under `gh_mlops_stack_dab/training/recipe.yaml`, `gh_mlops_stack_dab/training/profiles/databricks-dev.yaml`,
-and `gh_mlops_stack_dab/training/profiles/local.yaml`, specifying configs such as the training dataset path(s) to use when developing
+Address TODOs in the recipe configs under `mlops-bundles-demo/training/recipe.yaml`, `mlops-bundles-demo/training/profiles/databricks-dev.yaml`,
+and `mlops-bundles-demo/training/profiles/local.yaml`, specifying configs such as the training dataset path(s) to use when developing
 locally or on Databricks.
 
 For details on the meaning of recipe configurations, see the comments in [this example recipe.yaml](https://github.com/mlflow/recipes-regression-template/blob/main/recipe.yaml).
@@ -35,15 +35,15 @@ described in detail in
 the [Recipe overview](https://mlflow.org/docs/latest/recipes.html)
 and [API documentation](https://mlflow.org/docs/latest/python_api/mlflow.recipes.html).
 
-After configuring your recipe, you can iterate on and test ML code under ``gh_mlops_stack_dab/training/steps``.
+After configuring your recipe, you can iterate on and test ML code under ``mlops-bundles-demo/training/steps``.
 We expect most development to take place in the abovementioned YAML config files and
-`gh_mlops_stack_dab/training/steps/train.py` (model training logic).
+`mlops-bundles-demo/training/steps/train.py` (model training logic).
 
 ## Iterating on ML code
 
 ### Deploy ML code and resources to dev workspace using Bundles
 
-Refer to [Local development and dev workspace](../../gh_mlops_stack_dab/databricks-resources/README.md#local-development-and-dev-workspace) 
+Refer to [Local development and dev workspace](../../mlops-bundles-demo/databricks-resources/README.md#local-development-and-dev-workspace) 
 to use databricks CLI bundles to deploy ML code together with ML resource configs to dev workspace. 
 
 ### Develop on Databricks using Databricks Repos
@@ -64,17 +64,17 @@ Otherwise, e.g. if iterating on ML code for a new project, follow the steps belo
 * Follow the [UI workflow](https://learn.microsoft.com/azure/databricks/repos/git-operations-with-repos#add-a-repo-and-connect-remotely-later)
   for creating a repo, but uncheck the "Create repo by cloning a Git repository" checkbox.
 * Install the `dbx` CLI via `pip install --upgrade dbx`
-* Run `databricks configure --profile gh-mlops-stack-dab-dev --token --host <your-dev-workspace-url>`, passing the URL of your dev workspace.
+* Run `databricks configure --profile mlops-bundles-demo-dev --token --host <your-dev-workspace-url>`, passing the URL of your dev workspace.
   This should prompt you to enter an API token
 * [Create a personal access token](https://learn.microsoft.com/azure/databricks/dev-tools/auth#personal-access-tokens-for-users)
   in your dev workspace and paste it into the prompt from the previous step
 * From within the root directory of the current project, use the [dbx sync](https://dbx.readthedocs.io/en/latest/guides/python/devloop/mixed/#using-dbx-sync-repo-for-local-to-repo-synchronization) tool to copy code files from your local machine into the Repo by running
-  `dbx sync repo --profile gh-mlops-stack-dab-dev --source . --dest-repo your-repo-name`, where `your-repo-name` should be the last segment of the full repo name (`/Repos/username/your-repo-name`)
+  `dbx sync repo --profile mlops-bundles-demo-dev --source . --dest-repo your-repo-name`, where `your-repo-name` should be the last segment of the full repo name (`/Repos/username/your-repo-name`)
 
 #### Running code on Databricks
-You can iterate on ML code by running the provided `gh_mlops_stack_dab/training/notebooks/Train.py` notebook on Databricks using
+You can iterate on ML code by running the provided `mlops-bundles-demo/training/notebooks/Train.py` notebook on Databricks using
 [Repos](https://learn.microsoft.com/azure/databricks/repos/index). This notebook drives execution of
-the ML code defined under ``gh_mlops_stack_dab/training/steps``. You can use multiple browser tabs to edit
+the ML code defined under ``mlops-bundles-demo/training/steps``. You can use multiple browser tabs to edit
 logic in `steps` and run the training recipe in the `Train.py` notebook.
 
 
@@ -85,7 +85,7 @@ You can also iterate on ML code locally.
 
 #### Prerequisites
 * Python 3.8+
-* Install model training and test dependencies via `pip install -I -r gh_mlops_stack_dab/requirements.txt -r test-requirements.txt` from project root directory.
+* Install model training and test dependencies via `pip install -I -r mlops-bundles-demo/requirements.txt -r test-requirements.txt` from project root directory.
 
 #### Trigger model training
 Run `mlp run --profile local` to trigger training locally. See the

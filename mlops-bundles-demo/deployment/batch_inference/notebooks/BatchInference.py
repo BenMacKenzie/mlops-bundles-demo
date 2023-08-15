@@ -4,7 +4,7 @@
 #
 # This notebook is an example of applying a model for batch inference against an input delta table,
 # It is configured and can be executed as the batch_inference_job in the batch_inference_job workflow defined under
-# ``gh_mlops_stack_dab/databricks-resources/batch-inference-workflow-resource.yml``
+# ``mlops-bundles-demo/databricks-resources/batch-inference-workflow-resource.yml``
 #
 # Parameters:
 #

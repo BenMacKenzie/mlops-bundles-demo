@@ -2,7 +2,7 @@ import pytest
 import os
 import pandas as pd
 from pandas import DataFrame
-from gh_mlops_stack_dab.training.steps.split import process_splits
+from mlops-bundles-demo.training.steps.split import process_splits
 
 
 @pytest.fixture

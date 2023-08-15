@@ -1,0 +1,35 @@
+# This GitHub workflow deploys Bundle resources (ML resource config and more)
+# defined under mlops-bundles-demo/databricks-resources/*
+# and mlops-bundles-demo/bundle.yml with staging environment configs,
+# when PRs are merged into the default branch
+name: Bundle Deployment for gh-mlops-stack-dab Staging
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: ./mlops-bundles-demo
+
+env:
+  DATABRICKS_TOKEN: ${{secrets.mlops_staging}}
+  DATABRICKS_BUNDLE_ENV: staging
+
+jobs:
+  staging:
+    concurrency: gh-mlops-stack-dab-staging-bundle-job
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: databricks/setup-cli@main
+      - name: Validate Bundle For Staging Environment
+        id: validate
+        run: |
+          databricks bundle validate -e staging
+      - name: Deploy Bundle to Staging Environment
+        id: deploy
+        run: |
+          databricks bundle deploy -e staging

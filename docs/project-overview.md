@@ -24,9 +24,9 @@ This project contains the following components:
 contained in the following files:
 
 ```
-gh-mlops-stack-dab         <- Root directory. Both monorepo and polyrepo are supported.
+mlops-bundles-demo         <- Root directory. Both monorepo and polyrepo are supported.
 │
-├── gh_mlops_stack_dab       <- Contains python code, notebooks and ML resources related to one ML project. 
+├── mlops-bundles-demo       <- Contains python code, notebooks and ML resources related to one ML project. 
 │   │
 │   ├── requirements.txt        <- Specifies Python dependencies for ML code (for example: model training, batch inference).
 │   │

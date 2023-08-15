@@ -1,4 +1,4 @@
-from gh_mlops_stack_dab.training.steps.train import estimator_fn
+from mlops-bundles-demo.training.steps.train import estimator_fn
 from sklearn.utils.estimator_checks import check_estimator
 
 
