@@ -1,7 +1,7 @@
 variables:
   experiment_name:
     description: Experiment name for the model training.
-    default: ${bundle.environment}-mlops-bundles-demo-experiment
+    default: /Shared/mlops-bundles-demo/${bundle.environment}-mlops-bundles-demo-experiment
   model_name:
     description: Model name for the model training.
     default: ${bundle.environment}-mlops-bundles-demo-model
